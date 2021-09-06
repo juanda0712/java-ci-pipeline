@@ -1,14 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project name="java-ci-pipeline" default="build" basedir=".">
 
-    <fail message="Ant 1.10.4+ is required!">
-        <condition>
-            <not>
-                <antversion atleast="1.10.4"/>
-            </not>
-        </condition>
-    </fail>
-
     <path id="test.classpath">
         <pathelement path="build/test"/>
         <pathelement path="build/main"/>
@@ -28,21 +20,15 @@
     </target>
 
     <target name="compile" depends="init">
-        <javac destdir="build/main" srcdir="src/main/java" includeantruntime="false"/>
-        <javac destdir="build/test" classpathref="test.classpath" srcdir="src/test/java" includeantruntime="false"/>
+        <javac destdir="build/main" srcdir="main/java" includeantruntime="false"/>
+        <javac destdir="build/test" classpathref="test.classpath" srcdir="main/test" includeantruntime="false"/>
     </target>
 
     <!-- https://junit.org/junit5/docs/snapshot/user-guide/#running-tests-build-ant -->
     <target name="test.junit.launcher" depends="compile">
         <junitlauncher haltOnFailure="true" printSummary="true">
             <classpath refid="test.classpath"/>
-            <testclasses outputdir="build/test-report">
-                <fileset dir="build/test">
-                    <include name="**/*Tests.class"/>
-                </fileset>
-                <listener type="legacy-xml" sendSysOut="true" sendSysErr="true"/>
-                <listener type="legacy-plain" sendSysOut="true" />
-            </testclasses>
+            <test name="CalculadoraTests"/>
         </junitlauncher>
     </target>
 
