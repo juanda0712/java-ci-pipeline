@@ -5,12 +5,12 @@ import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.CsvSource;
 
 class CalculadoraTests {
-    Calculadora calculator = new Calculadora();
+    Calculadora calculadora = new Calculadora();
     @Test
     @DisplayName("1 + 1 = 2")
-    void addsTwoNumbers() {
+    void sumarDosNumeros() {
 
-        Assertions.assertEquals(2, calculator.add(1, 1), "1 + 1 should equal 2");
+        Assertions.assertEquals(2, calculadora.add(1, 1), "1 + 1 should equal 2");
     }
 
     @ParameterizedTest(name = "{0} + {1} = {2}")
@@ -20,9 +20,9 @@ class CalculadoraTests {
             "49,  51, 100",
             "1,  100, 101"
     })
-    void add(int first, int second, int expectedResult) {
+    void suma(int first, int second, int expectedResult) {
 
-        Assertions.assertEquals(expectedResult, calculator.add(first, second),
+        Assertions.assertEquals(expectedResult, calculadora.add(first, second),
                 () -> first + " + " + second + " should equal " + expectedResult);
     }
 }
