@@ -1,51 +1,61 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<project name="java-ci-pipeline" default="build" basedir=".">
+<?xml version="1.0"?>
+<project default="test">
+    <!-- input directories and files -->
+    <property name="app.src.dir" value="main/java" />
+    <property name="tests.src.dir" value="main/test" />
+    <property name="lib.dir" value="lib" />
 
-    <path id="test.classpath">
-        <pathelement path="build/test"/>
-        <pathelement path="build/main"/>
-        <fileset dir="${ant.home}/lib" includes="*.jar" />
-    </path>
+    <!-- output directories and files -->
+    <property name="build.dir" value="build" />
+    <property name="app.classes.dir" value="${build.dir}/application/classes" />
+    <property name="app.jar.dir" value="${build.dir}/application/jar" />
+    <property name="version" value="1.0" />
+    <property name="app.jar.name" value="Calculadora-${version}.jar" />
+    <property name="app.jar.main-class" value="CalculadoraConPruebas" />
+    <property name="tests.classes.dir" value="${build.dir}/tests/classes" />
+    <property name="install.dir" value="${user.home}/bin" />
+    <property name="app.jar.pathname" value="${app.jar.dir}/${app.jar.name}" />
 
-    <target name="build" description="clean build" depends="clean, test" />
+    <target name="build">
+        <mkdir dir="${app.classes.dir}" />
+        <mkdir dir="${app.jar.dir}" />
+        <mkdir dir="${tests.classes.dir}" />
+
+        <javac srcdir="${app.src.dir}" destdir="${app.classes.dir}" debug="on" includeantruntime="false"/>
+        <jar destfile="${app.jar.pathname}" basedir="${app.classes.dir}">
+            <manifest>
+                <attribute name="Main-Class" value="${app.jar.main-class}" />
+            </manifest>
+        </jar>
+
+        <javac srcdir="${tests.src.dir}" destdir="${tests.classes.dir}" debug="on" includeantruntime="false">
+            <classpath>
+                <fileset dir="${lib.dir}" includes="**/*.jar"/>
+                <path location="${app.jar.pathname}"/>
+            </classpath>
+        </javac>
+    </target>
 
     <target name="clean">
-        <delete dir="build"/>
+        <delete dir="${build.dir}" />
     </target>
 
-    <target name="init">
-        <mkdir dir="build/main"/>
-        <mkdir dir="build/test"/>
-        <mkdir dir="build/test-report"/>
+    <target name="test" depends="build">
+        <junit printsummary="on" haltonfailure="yes" fork="true">
+            <classpath>
+                <fileset dir="${lib.dir}" includes="**/*.jar"/>
+                <path location="${app.jar.pathname}"/>
+                <pathelement location="${tests.classes.dir}"/>
+            </classpath>
+            <formatter type="brief" usefile="false" />
+            <batchtest>
+                <fileset dir="${tests.src.dir}" includes="**/*Test.java" />
+            </batchtest>
+        </junit>
     </target>
 
-    <target name="compile" depends="init">
-        <javac destdir="build/main" srcdir="main/java" includeantruntime="false"/>
-        <javac destdir="build/test" classpathref="test.classpath" srcdir="main/test" includeantruntime="false"/>
+    <target name="install" depends="build">
+        <copy file="${app.jar.pathname}" todir="${install.dir}" />
     </target>
-
-    <!-- https://junit.org/junit5/docs/snapshot/user-guide/#running-tests-build-ant -->
-    <target name="test.junit.launcher" depends="compile">
-        <junitlauncher haltOnFailure="true" printSummary="true">
-            <classpath refid="test.classpath"/>
-            <test name="CalculadoraTests"/>
-        </junitlauncher>
-    </target>
-
-    <!-- https://junit.org/junit5/docs/current/user-guide/#running-tests-console-launcher -->
-    <target name="test.console.launcher" depends="compile">
-        <java classpathref="test.classpath" classname="org.junit.platform.console.ConsoleLauncher" fork="true" failonerror="true">
-            <arg value="--scan-classpath"/>
-            <arg line="--reports-dir build/test-report"/>
-        </java>
-        <junitreport todir="build/test-report">
-            <fileset dir="build/test-report">
-                <include name="TEST-*.xml"/>
-            </fileset>
-            <report format="frames" todir="build/test-report/html"/>
-        </junitreport>
-    </target>
-
-    <target name="test" depends="test.junit.launcher, test.console.launcher" />
-
 </project>
+
