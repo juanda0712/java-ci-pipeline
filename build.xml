@@ -5,7 +5,7 @@
         <junit printsummary="on">
             <test name="TestCalculadora"/>
             <classpath>
-                <pathelement location="C:\Users\JuanDa\.m2\repository\junit\junit\3.8.2\junit-3.8.2.jar"/>
+                <pathelement location="lib/junit-3.8.2.jar"/>
                 <pathelement location="build/classes"/>
             </classpath>
         </junit>
@@ -15,7 +15,7 @@
         <mkdir dir="build"/>
         <mkdir dir="build/classes"/>
         <mkdir dir="build/lib"/>
-        <javac includeantruntime="false" srcdir="main" destdir="build/classes" classpath="C:\Users\JuanDa\.m2\repository\junit\junit\3.8.2\junit-3.8.2.jar"/>
+        <javac includeantruntime="false" srcdir="main" destdir="build/classes" classpath="lib/junit-3.8.2.jar"/>
     </target>
 
     <target name="clean">
