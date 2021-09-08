@@ -1,19 +1,30 @@
 import junit.framework.TestCase;
 
-public class CalculadoraTests extends TestCase {
-    Calculadora calculadora = new Calculadora();
+public class TestCalculadora extends TestCase {
+
+    Calculadora calculator = new Calculadora();
 
     public void testAddsTwoNumbers() {
-        int sum = calculadora.suma(1, 1);
+        int sum = calculator.suma(1,1);
         assertEquals(2, sum);
     }
 }
 
-    /*
+
+
+/*import org.junit.jupiter.api.Assertions;
+import org.junit.jupiter.api.DisplayName;
+import org.junit.jupiter.api.Test;
+import org.junit.jupiter.params.ParameterizedTest;
+import org.junit.jupiter.params.provider.CsvSource;
+
+public class CalculadoraTests{
+    Calculadora calculadora = new Calculadora();
+
     //SUMAS
     @Test
     @DisplayName("1 + 1 = 2")
-    void sumarDosNumeros() {
+    public void sumarDosNumeros() {
         Assertions.assertEquals(2, calculadora.suma(1, 1), "1 + 1 es 2");
     }
 
@@ -24,13 +35,13 @@ public class CalculadoraTests extends TestCase {
             "49,  51, 100",
             "1,  100, 101"
     })
-    void suma(int n1, int n2, int resultadoEsperado) {
+    public void suma(int n1, int n2, int resultadoEsperado) {
         Assertions.assertEquals(resultadoEsperado, calculadora.suma(n1, n2),
                 () -> n1 + " + " + n2 + " es igual a " + resultadoEsperado);
     }
 
     @Test
-    void falloEnSumaPorParametrosNegativos(){
+    public void falloEnSumaPorParametrosNegativos(){
         Assertions.assertThrows(IllegalArgumentException.class,() -> {
             calculadora.suma(-2, 2);
         });
@@ -42,7 +53,7 @@ public class CalculadoraTests extends TestCase {
     //RESTAS
     @Test
     @DisplayName("10 - 3 = 7")
-    void restarDosNumeros() {
+    public void restarDosNumeros() {
         Assertions.assertEquals(7, calculadora.resta(10, 3), "10 - 3 es 7");
     }
 
@@ -53,13 +64,13 @@ public class CalculadoraTests extends TestCase {
             "49,  51, -2",
             "1,  100, -99"
     })
-    void resta(int n1, int n2, int resultadoEsperado) {
+    public void resta(int n1, int n2, int resultadoEsperado) {
         Assertions.assertEquals(resultadoEsperado, calculadora.resta(n1, n2),
                 () -> n1 + " - " + n2 + " es igual a " + resultadoEsperado);
     }
 
     @Test
-    void falloEnRestaPorParametrosNegativos(){
+    public void falloEnRestaPorParametrosNegativos(){
         Assertions.assertThrows(IllegalArgumentException.class,() -> {
             calculadora.resta(-2, 2);
         });
@@ -72,7 +83,7 @@ public class CalculadoraTests extends TestCase {
     //MULTIPLICACION
     @Test
     @DisplayName("10 * 3 = 30")
-    void multiplicarDosNumeros() {
+    public void multiplicarDosNumeros() {
         Assertions.assertEquals(30, calculadora.multiplicacion(10, 3), "10 * 3 es 30");
     }
 
@@ -83,13 +94,13 @@ public class CalculadoraTests extends TestCase {
             "49,  51, 2499",
             "1,  100, 100"
     })
-    void multiplicar(int n1, int n2, int resultadoEsperado) {
+    public void multiplicar(int n1, int n2, int resultadoEsperado) {
         Assertions.assertEquals(resultadoEsperado, calculadora.multiplicacion(n1, n2),
                 () -> n1 + " * " + n2 + " es igual a " + resultadoEsperado);
     }
 
     @Test
-    void falloEnMultiplicacionPorParametrosNegativos(){
+    public void falloEnMultiplicacionPorParametrosNegativos(){
         Assertions.assertThrows(IllegalArgumentException.class,() -> {
             calculadora.multiplicacion(-2, 2);
         });
@@ -102,7 +113,7 @@ public class CalculadoraTests extends TestCase {
     //DIVISION
     @Test
     @DisplayName("10 / 3 = 3")
-    void dividirEnteraDosNumeros() {
+    public void dividirEnteraDosNumeros() {
         Assertions.assertEquals(3, calculadora.divisionEntera(10, 3), "10 / 3 es 3");
     }
 
@@ -113,21 +124,18 @@ public class CalculadoraTests extends TestCase {
             "49,  51, 0",
             "1,  100, 0"
     })
-    void division(int n1, int n2, int resultadoEsperado) {
+    public void division(int n1, int n2, int resultadoEsperado) {
         Assertions.assertEquals(resultadoEsperado, calculadora.divisionEntera(n1, n2),
                 () -> n1 + " / " + n2 + " es igual a " + resultadoEsperado);
     }
 
     @Test
-    void falloEnDivisionPorParametrosNegativos(){
+    public void falloEnDivisionPorParametrosNegativos(){
         Assertions.assertThrows(IllegalArgumentException.class,() -> {
             calculadora.divisionEntera(-2, 2);
         });
         Assertions.assertThrows(IllegalArgumentException.class,() -> {
             calculadora.divisionEntera(2, -2);
         });
-    }*/
-
-
-
-
+    }
+}*/

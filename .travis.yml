@@ -1,10 +1,13 @@
 language: java
-branches:
-  only:
-    - master
+
 rvm:
   - 1.8
   - java
 
 os: windows
-install: ant deps
+
+-task: Ant@1
+  inputs:
+    antbuildFile: 'build.xml'
+script:
+  - ant dist
