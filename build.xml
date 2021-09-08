@@ -30,7 +30,7 @@
 
         <javac srcdir="${tests.src.dir}" destdir="${tests.classes.dir}" debug="on" includeantruntime="false">
             <classpath>
-                <!--<fileset dir="${lib.dir}" includes="**/*.jar"/>  -->
+                <fileset dir="${lib.dir}" includes="**/*.jar"/>
                 <path location="${app.jar.pathname}"/>
             </classpath>
         </javac>

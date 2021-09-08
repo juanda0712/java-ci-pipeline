@@ -1,12 +1,15 @@
-import org.junit.jupiter.api.Assertions;
-import org.junit.jupiter.api.DisplayName;
-import org.junit.jupiter.api.Test;
-import org.junit.jupiter.params.ParameterizedTest;
-import org.junit.jupiter.params.provider.CsvSource;
+import junit.framework.TestCase;
 
-class CalculadoraTests{
+public class CalculadoraTests extends TestCase {
     Calculadora calculadora = new Calculadora();
 
+    public void testAddsTwoNumbers() {
+        int sum = calculadora.suma(1, 1);
+        assertEquals(2, sum);
+    }
+}
+
+    /*
     //SUMAS
     @Test
     @DisplayName("1 + 1 = 2")
@@ -123,8 +126,8 @@ class CalculadoraTests{
         Assertions.assertThrows(IllegalArgumentException.class,() -> {
             calculadora.divisionEntera(2, -2);
         });
-    }
-}
+    }*/
+
 
 
 
