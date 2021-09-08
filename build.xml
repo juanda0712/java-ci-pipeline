@@ -1,7 +1,7 @@
 <?xml version="1.0"?>
-<project name="java-ci-pipeline" default="runjunit" basedir=".">
+<project name="java-ci-pipeline" default="test" basedir=".">
     <property name="version" value="1.0" />
-    <target name="runjunit" depends="createjar">
+    <target name="test" depends="createjar">
         <junit printsummary="on">
             <test name="TestCalculadora"/>
             <classpath>
