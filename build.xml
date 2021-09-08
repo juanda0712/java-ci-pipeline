@@ -1,5 +1,5 @@
 <?xml version="1.0"?>
-<project default="runjunit" basedir=".">
+<project name="java-ci-pipeline" default="runjunit" basedir=".">
     <property name="version" value="1.0" />
     <target name="runjunit" depends="createjar">
         <junit printsummary="on">
