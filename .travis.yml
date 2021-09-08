@@ -4,8 +4,6 @@ rvm:
   - 1.8
   - java
 
-os: windows
-
 -task:
   inputs:
     antbuildFile: 'build.xml'
