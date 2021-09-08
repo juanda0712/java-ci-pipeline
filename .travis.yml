@@ -4,6 +4,6 @@ rvm:
   - 1.8
   - java
 
--task: Ant@1
+-task: 
   inputs:
     antbuildFile: 'build.xml'
